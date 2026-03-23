@@ -45,32 +45,47 @@ AssemblyAI (Live Transcription)
 LLM (Coaching + Evaluation)
         ↓
 Real-Time Guidance + Final Report
-Workflow
-The user starts a voice-based training session.
-Audio is streamed and transcribed in real time.
-The AI analyzes the conversation context and checks for service quality signals.
-During training mode, the system provides live coaching tips.
-After the session ends, the system generates a final evaluation report.
-Tech Stack
-Python 3.11
-FastAPI
-Uvicorn
-WebSockets
-WebRTC
-AssemblyAI
-OpenAI / Mistral
-Jinja2
-Railway
-Project Highlights
-Built a real-time AI-assisted training workflow
-Integrated live transcription with LLM-based reasoning
-Designed coaching logic that avoids repetitive or disruptive feedback
-Supported both real-time guidance and post-call evaluation
-Developed a prototype suitable for intelligent training environments
-Requirements
+```
 
-Install dependencies from requirements.txt:
+## Workflow
 
+1. The user starts a voice-based training session.
+2. Audio is streamed and transcribed in real time.
+3. The AI analyzes the conversation context and checks for service quality signals.
+4. During training mode, the system provides live coaching tips.
+5. After the session ends, the system generates a final evaluation report.
+
+---
+
+## Tech Stack
+
+- Python 3.11
+- FastAPI
+- Uvicorn
+- WebSockets
+- WebRTC
+- AssemblyAI
+- OpenAI / Mistral
+- Jinja2
+- Railway
+
+---
+
+## Project Highlights
+
+- Built a real-time AI-assisted training workflow
+- Integrated live transcription with LLM-based reasoning
+- Designed coaching logic that avoids repetitive or disruptive feedback
+- Supported both real-time guidance and post-call evaluation
+- Developed a prototype suitable for intelligent training environments
+
+---
+
+## Requirements
+
+Install dependencies from `requirements.txt`:
+
+```txt
 fastapi
 uvicorn[standard]
 python-dotenv
@@ -80,88 +95,156 @@ jinja2
 pydantic
 websockets
 itsdangerous
-Local Setup
-1. Clone the repository
+```
+
+---
+
+## Local Setup
+
+### 1. Clone the repository
+
+```bash
 git clone https://github.com/AmaneQaddah/call-coach.git
 cd call-coach
-2. Create a virtual environment
+```
+
+### 2. Create a virtual environment
+
+```bash
 python -m venv venv
+```
 
 Activate it:
 
-Windows
-
+**Windows**
+```bash
 venv\Scripts\activate
+```
 
-macOS / Linux
-
+**macOS / Linux**
+```bash
 source venv/bin/activate
-3. Install dependencies
+```
+
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
-4. Create a .env file
+```
+
+### 4. Create a `.env` file
+
+```env
 OPENAI_API_KEY=your_openai_key
 ASSEMBLYAI_API_KEY=your_assemblyai_key
+```
 
 Do not commit this file to GitHub.
 
-5. Run the application
+### 5. Run the application
+
+```bash
 uvicorn app:app --reload
+```
 
 Open in the browser:
 
+```text
 http://127.0.0.1:8000
 http://127.0.0.1:8000/docs
-Deployment
+```
+
+---
+
+## Deployment
 
 This project requires a persistent backend server because it relies on WebSockets and live audio processing.
 
-Railway start command
+### Railway start command
+
+```bash
 uvicorn app:app --host 0.0.0.0 --port $PORT
-Required environment variables
-OPENAI_API_KEY
-ASSEMBLYAI_API_KEY
-Environment Variables
-Variable	Description
-OPENAI_API_KEY	Used for AI coaching and post-call evaluation
-ASSEMBLYAI_API_KEY	Used for live speech transcription
+```
+
+### Required environment variables
+
+- `OPENAI_API_KEY`
+- `ASSEMBLYAI_API_KEY`
+
+---
+
+## Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `OPENAI_API_KEY` | Used for AI coaching and post-call evaluation |
+| `ASSEMBLYAI_API_KEY` | Used for live speech transcription |
 
 Example usage in Python:
 
+```python
 import os
 
 openai_key = os.getenv("OPENAI_API_KEY")
 assemblyai_key = os.getenv("ASSEMBLYAI_API_KEY")
-AI Logic
+```
+
+---
+
+## AI Logic
 
 The system combines real-time speech transcription with LLM-based reasoning to:
+- monitor the flow of the conversation
+- detect whether important service behaviors are being followed
+- provide context-aware coaching during training
+- avoid repeating the same advice unnecessarily
+- generate a final performance summary after the call
 
-monitor the flow of the conversation
-detect whether important service behaviors are being followed
-provide context-aware coaching during training
-avoid repeating the same advice unnecessarily
-generate a final performance summary after the call
-Known Limitations
-Free-tier deployment may cause cold starts
-Browser microphone permissions are required
-Real-time performance depends on network quality
-This is currently a prototype-scale system
-Future Improvements
-Employer performance dashboard
-Persistent analytics and call history
-Multilingual support
-More advanced coaching personalization
-Multi-scenario and multi-agent simulation
-Screenshots
+---
+
+## Known Limitations
+
+- Free-tier deployment may cause cold starts
+- Browser microphone permissions are required
+- Real-time performance depends on network quality
+- This is currently a prototype-scale system
+
+---
+
+## Future Improvements
+
+- Employer performance dashboard
+- Persistent analytics and call history
+- Multilingual support
+- More advanced coaching personalization
+- Multi-scenario and multi-agent simulation
+
+---
+
+## Screenshots
 
 Add screenshots here if available:
 
+```md
 ![Training Screen](assets/training-screen.png)
 ![Evaluation Report](assets/evaluation-report.png)
-Project Context
+```
+
+---
+
+## Project Context
 
 This project was developed as part of an academic project focused on AI-assisted training, real-time feedback, and human-centered system design.
 
-Author
+---
 
-Amani Qaddah
-GitHub: https://github.com/AmaneQaddah
+## Author
+
+**Amani Qaddah**  
+GitHub: [https://github.com/AmaneQaddah](https://github.com/AmaneQaddah)
+
+---
+
+## License
+
+MIT License
