@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+assemblyai
+mistralai
+jinja2
+pydantic
+websockets
+itsdangerous
+openai>=1.0.0
+requests
+openai
