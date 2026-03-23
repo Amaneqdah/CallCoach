@@ -1,70 +1,76 @@
-```markdown
-# 🎧 CoachAI — Real-Time AI Coaching for Voice Calls
+# Call Coach — Real-Time AI Coaching for Customer Service Calls
 
-CoachAI is a real-time AI coaching system designed to support customer-service agents **during live voice calls**.  
-It listens to conversations, transcribes speech, analyzes agent behavior, and provides **context-aware guidance and feedback** — without interrupting the call.
+Call Coach is an AI-powered training platform for customer-service agents. It supports voice-based practice sessions by transcribing calls in real time, analyzing conversation context, and providing actionable coaching during training. After each session, the system generates a post-call evaluation report to help agents improve their communication and service quality.
 
----
-
-## ✨ Key Features
-
-- 🎙 Live voice calls using WebRTC
-- 📝 Real-time transcription (AssemblyAI)
-- 🤖 AI coach with checklist-based guidance
-- 📊 Post-call evaluation and report
-- 🧠 LLM-powered reasoning (OpenAI / Mistral)
-- 🌐 FastAPI backend with WebSockets
+This project was designed to make customer-service training more scalable, consistent, and effective through real-time AI assistance.
 
 ---
 
-## 🧩 System Architecture
+## Problem
 
-```
+Training customer-service agents is often time-consuming, expensive, and inconsistent. Managers cannot monitor every call in real time, and new agents may struggle to receive immediate, actionable feedback while practicing.
 
-Browser (Mic + WebRTC)
-↓
-FastAPI Backend (Railway)
-↓
+## Solution
+
+Call Coach provides:
+- real-time AI guidance during training calls
+- structured post-call evaluation
+- a more consistent and scalable training experience
+- support for both trainees and employers
+
+---
+
+## Key Features
+
+- Live voice-call support using WebRTC
+- Real-time speech transcription
+- AI-generated coaching during training sessions
+- Context-aware suggestions based on conversation flow
+- Post-call evaluation and feedback report
+- Role-based experience for trainees and employers
+- Exam mode for performance assessment without live coaching
+- FastAPI backend with WebSocket support
+
+---
+
+## System Architecture
+
+```text
+Browser (Microphone + WebRTC)
+        ↓
+FastAPI Backend
+        ↓
 AssemblyAI (Live Transcription)
-↓
+        ↓
 LLM (Coaching + Evaluation)
-↓
-Real-time tips + Final Report
+        ↓
+Real-Time Guidance + Final Report
+Workflow
+The user starts a voice-based training session.
+Audio is streamed and transcribed in real time.
+The AI analyzes the conversation context and checks for service quality signals.
+During training mode, the system provides live coaching tips.
+After the session ends, the system generates a final evaluation report.
+Tech Stack
+Python 3.11
+FastAPI
+Uvicorn
+WebSockets
+WebRTC
+AssemblyAI
+OpenAI / Mistral
+Jinja2
+Railway
+Project Highlights
+Built a real-time AI-assisted training workflow
+Integrated live transcription with LLM-based reasoning
+Designed coaching logic that avoids repetitive or disruptive feedback
+Supported both real-time guidance and post-call evaluation
+Developed a prototype suitable for intelligent training environments
+Requirements
 
-```
+Install dependencies from requirements.txt:
 
----
-
-## 🚀 Live Demo
-
-Backend URL:
-```
-
-[https://coachai-production-](coachai-production-a2ab.up.railway.app)<id>.up.railway.app
-
-```
-
-
-
----
-
-## 🛠 Tech Stack
-
-- Python 3.11
-- FastAPI
-- Uvicorn
-- WebSockets
-- WebRTC
-- AssemblyAI
-- OpenAI / Mistral
-- Jinja2
-- Railway
-
----
-
-## 📦 Requirements
-
-```txt
 fastapi
 uvicorn[standard]
 python-dotenv
@@ -74,126 +80,88 @@ jinja2
 pydantic
 websockets
 itsdangerous
-````
-
----
-
-## ⚙️ Local Setup
-
-### Clone the repository
-
-```bash
-git clone https://github.com/SoaadHamood/coachAI.git
-cd coachAI
-```
-
-### Create a virtual environment
-
-```bash
+Local Setup
+1. Clone the repository
+git clone https://github.com/AmaneQaddah/call-coach.git
+cd call-coach
+2. Create a virtual environment
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-```
 
-### Install dependencies
+Activate it:
 
-```bash
+Windows
+
+venv\Scripts\activate
+
+macOS / Linux
+
+source venv/bin/activate
+3. Install dependencies
 pip install -r requirements.txt
-```
+4. Create a .env file
+OPENAI_API_KEY=your_openai_key
+ASSEMBLYAI_API_KEY=your_assemblyai_key
 
-### Create `.env` (local only)
+Do not commit this file to GitHub.
 
-```env
-OPENAI_API_KEY=sk-...
-ASSEMBLYAI_API_KEY=...
-```
-
-⚠️ Do not commit this file.
-
-### Run the app
-
-```bash
+5. Run the application
 uvicorn app:app --reload
-```
 
-Open:
+Open in the browser:
 
-```
 http://127.0.0.1:8000
 http://127.0.0.1:8000/docs
-```
+Deployment
 
----
+This project requires a persistent backend server because it relies on WebSockets and live audio processing.
 
-## ☁️ Deployment (Railway)
-
-This project requires a persistent server (WebSockets + live audio).
-
-### Start command:
-
-```bash
+Railway start command
 uvicorn app:app --host 0.0.0.0 --port $PORT
-```
+Required environment variables
+OPENAI_API_KEY
+ASSEMBLYAI_API_KEY
+Environment Variables
+Variable	Description
+OPENAI_API_KEY	Used for AI coaching and post-call evaluation
+ASSEMBLYAI_API_KEY	Used for live speech transcription
 
-### Environment variables (Railway → Service → Variables):
+Example usage in Python:
 
-* OPENAI_API_KEY
-* ASSEMBLYAI_API_KEY
-
----
-
-## 🔐 Environment Variables
-
-| Name               | Description                     |
-| ------------------ | ------------------------------- |
-| OPENAI_API_KEY     | LLM for coaching and evaluation |
-| ASSEMBLYAI_API_KEY | Live speech transcription       |
-
-They are accessed via:
-
-```python
 import os
-os.getenv("OPENAI_API_KEY")
-```
 
----
+openai_key = os.getenv("OPENAI_API_KEY")
+assemblyai_key = os.getenv("ASSEMBLYAI_API_KEY")
+AI Logic
 
-## 🧠 AI Logic
+The system combines real-time speech transcription with LLM-based reasoning to:
 
-* Checklist-based coaching
-* Context-aware suggestions
-* No repetition of advice during calls
-* Final post-call evaluation
+monitor the flow of the conversation
+detect whether important service behaviors are being followed
+provide context-aware coaching during training
+avoid repeating the same advice unnecessarily
+generate a final performance summary after the call
+Known Limitations
+Free-tier deployment may cause cold starts
+Browser microphone permissions are required
+Real-time performance depends on network quality
+This is currently a prototype-scale system
+Future Improvements
+Employer performance dashboard
+Persistent analytics and call history
+Multilingual support
+More advanced coaching personalization
+Multi-scenario and multi-agent simulation
+Screenshots
 
----
+Add screenshots here if available:
 
-## 🧪 Known Limitations
+![Training Screen](assets/training-screen.png)
+![Evaluation Report](assets/evaluation-report.png)
+Project Context
 
-* Cold starts on free tiers
-* Requires browser microphone permissions
-* Prototype-scale deployment
+This project was developed as part of an academic project focused on AI-assisted training, real-time feedback, and human-centered system design.
 
----
+Author
 
-## 📌 Future Improvements
-
-* Agent performance dashboard
-* Multi-agent simulation
-* Multilingual support
-* Persistent analytics
-
----
-
-## 👩‍💻 Author
-
-Soaad Hamood
-GitHub: [https://github.com/SoaadHamood](https://github.com/SoaadHamood)
-
----
-
-## 📄 License
-
-MIT License
-
-```
-
-
+Amani Qaddah
+GitHub: https://github.com/AmaneQaddah
